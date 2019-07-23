@@ -14,4 +14,11 @@ class SlackService {
         return json["files"]
     }
 
+    deleteFile(fileId: number) {
+        const url = `https://slack.com/api/files.delete?token=${this.token}&file=${fileId}`
+        const json = JSON.parse(UrlFetchApp.fetch(url).getContentText())
+        if(!json["ok"]){
+            Logger.log("failed to delete specified file.")
+        }
+    }
 }
